@@ -1,0 +1,1 @@
+/usr/bin/c++  -Wall -Wextra -Wpedantic -O3 -DNDEBUG -march=native -mtune=native -flto -ffast-math -funroll-loops -Wl,-search_paths_first -Wl,-headerpad_max_install_names  -flto CMakeFiles/feed_handler.dir/src/main.cpp.o -o feed_handler

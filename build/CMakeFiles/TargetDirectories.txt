@@ -1,0 +1,15 @@
+/Users/mickelsamuel/dpdk-itch5-feedhandler/build/CMakeFiles/feed_handler.dir
+/Users/mickelsamuel/dpdk-itch5-feedhandler/build/CMakeFiles/test_ring_buffer.dir
+/Users/mickelsamuel/dpdk-itch5-feedhandler/build/CMakeFiles/test_parser.dir
+/Users/mickelsamuel/dpdk-itch5-feedhandler/build/CMakeFiles/test_moldudp64.dir
+/Users/mickelsamuel/dpdk-itch5-feedhandler/build/CMakeFiles/bench_ring_buffer.dir
+/Users/mickelsamuel/dpdk-itch5-feedhandler/build/CMakeFiles/bench_parser.dir
+/Users/mickelsamuel/dpdk-itch5-feedhandler/build/CMakeFiles/package.dir
+/Users/mickelsamuel/dpdk-itch5-feedhandler/build/CMakeFiles/package_source.dir
+/Users/mickelsamuel/dpdk-itch5-feedhandler/build/CMakeFiles/test.dir
+/Users/mickelsamuel/dpdk-itch5-feedhandler/build/CMakeFiles/edit_cache.dir
+/Users/mickelsamuel/dpdk-itch5-feedhandler/build/CMakeFiles/rebuild_cache.dir
+/Users/mickelsamuel/dpdk-itch5-feedhandler/build/CMakeFiles/list_install_components.dir
+/Users/mickelsamuel/dpdk-itch5-feedhandler/build/CMakeFiles/install.dir
+/Users/mickelsamuel/dpdk-itch5-feedhandler/build/CMakeFiles/install/local.dir
+/Users/mickelsamuel/dpdk-itch5-feedhandler/build/CMakeFiles/install/strip.dir

@@ -1,0 +1,98 @@
+Start testing: Dec 02 15:20 EST
+----------------------------------------------------------
+1/3 Testing: RingBufferTest
+1/3 Test: RingBufferTest
+Command: "/Users/mickelsamuel/dpdk-itch5-feedhandler/build/test_ring_buffer"
+Directory: /Users/mickelsamuel/dpdk-itch5-feedhandler/build
+"RingBufferTest" start time: Dec 02 15:20 EST
+Output:
+----------------------------------------------------------
+=== Lock-Free SPSC Ring Buffer Tests ===
+Buffer size: 1024
+Concurrent test messages: 100000
+Cache line size: 64 bytes
+
+PASS: test_basic_operations
+PASS: test_fifo_ordering
+PASS: test_wraparound
+PASS: test_peek
+PASS: test_concurrent_spsc
+PASS: test_normalized_message
+PASS: test_alignment
+
+=== Results ===
+Passed: 7
+Failed: 0
+<end of output>
+Test time =   0.29 sec
+----------------------------------------------------------
+Test Passed.
+"RingBufferTest" end time: Dec 02 15:20 EST
+"RingBufferTest" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/3 Testing: ParserTest
+2/3 Test: ParserTest
+Command: "/Users/mickelsamuel/dpdk-itch5-feedhandler/build/test_parser"
+Directory: /Users/mickelsamuel/dpdk-itch5-feedhandler/build
+"ParserTest" start time: Dec 02 15:20 EST
+Output:
+----------------------------------------------------------
+=== ITCH 5.0 Parser Tests ===
+
+PASS: test_message_sizes
+PASS: test_get_message_size
+PASS: test_endian_utils
+PASS: test_parse_add_order
+PASS: test_parse_order_executed
+PASS: test_parse_order_delete
+PASS: test_parse_multiple_messages
+PASS: test_normalize_add_order
+PASS: test_incomplete_message
+PASS: test_unknown_message
+
+=== Results ===
+Passed: 10
+Failed: 0
+<end of output>
+Test time =   0.30 sec
+----------------------------------------------------------
+Test Passed.
+"ParserTest" end time: Dec 02 15:20 EST
+"ParserTest" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/3 Testing: MoldUDP64Test
+3/3 Test: MoldUDP64Test
+Command: "/Users/mickelsamuel/dpdk-itch5-feedhandler/build/test_moldudp64"
+Directory: /Users/mickelsamuel/dpdk-itch5-feedhandler/build
+"MoldUDP64Test" start time: Dec 02 15:20 EST
+Output:
+----------------------------------------------------------
+=== MoldUDP64 Session Layer Tests ===
+
+PASS: test_header_size
+PASS: test_header_parsing
+PASS: test_heartbeat_detection
+PASS: test_end_of_session
+PASS: test_session_initial_state
+PASS: test_session_normal_operation
+PASS: test_session_gap_detection
+PASS: test_session_heartbeat_handling
+PASS: test_session_multiple_gaps
+PASS: test_session_reset
+PASS: test_session_is_healthy
+PASS: test_truncated_packet
+
+=== Results ===
+Passed: 12
+Failed: 0
+<end of output>
+Test time =   0.28 sec
+----------------------------------------------------------
+Test Passed.
+"MoldUDP64Test" end time: Dec 02 15:20 EST
+"MoldUDP64Test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Dec 02 15:20 EST

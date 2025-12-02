@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/Users/mickelsamuel/dpdk-itch5-feedhandler/build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
