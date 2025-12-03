@@ -1,0 +1,18 @@
+=== MoldUDP64 Session Layer Tests ===
+
+PASS: test_header_size
+PASS: test_header_parsing
+PASS: test_heartbeat_detection
+PASS: test_end_of_session
+PASS: test_session_initial_state
+PASS: test_session_normal_operation
+PASS: test_session_gap_detection
+PASS: test_session_heartbeat_handling
+PASS: test_session_multiple_gaps
+PASS: test_session_reset
+PASS: test_session_is_healthy
+PASS: test_truncated_packet
+
+=== Results ===
+Passed: 12
+Failed: 0

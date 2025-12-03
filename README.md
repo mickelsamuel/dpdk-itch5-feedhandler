@@ -156,20 +156,104 @@ python3 scripts/itch_to_pcap.py input.itch output.pcap
 | I | NOII | 50 |
 | N | RPII | 20 |
 
-## Performance Characteristics
+## Performance Results
 
-*Benchmarks run on Apple M-series (results will vary by CPU)*
+### Benchmark Environment
 
-### Lock-Free Ring Buffer
-- **Single-threaded**: ~440 million ops/sec
-- **Producer-Consumer**: ~15 million msgs/sec (NormalizedMessage, 64 bytes)
-- **Latency**: ~2-3 ns/op (single-threaded)
+| Parameter | Value |
+|-----------|-------|
+| **CPU** | Apple M-series (12 cores @ 2.6 GHz) |
+| **L1 Cache** | 32 KiB (Data) |
+| **L2 Cache** | 256 KiB |
+| **Compiler** | Apple Clang 17.0.0 |
+| **Build** | Release (-O3) |
 
-### ITCH Parser
-- **AddOrder parsing**: ~100 million msgs/sec
-- **Mixed messages**: ~60 million msgs/sec
-- **Zero-copy overhead**: < 10ns per message
-- **Endian conversion**: ~2.7 billion swaps/sec
+---
+
+### Lock-Free SPSC Ring Buffer
+
+| Benchmark | Operations | Throughput | Latency |
+|-----------|------------|------------|---------|
+| **Single-Threaded** | 10,000,000 | **445.95 million ops/sec** | 2.2 ns/op |
+| **Concurrent P/C** | 10,000,000 | 6.79 million ops/sec | 147 ns/op |
+| **NormalizedMessage (64 bytes)** | 10,000,000 | **15.19 million msgs/sec** | 65.8 ns/msg |
+
+#### Latency Distribution (Concurrent Producer/Consumer)
+
+| Metric | Value |
+|--------|-------|
+| **Samples** | 100,000 |
+| **Min** | 132 ns |
+| **Max** | 350,277 ns |
+| **Mean** | 137,409 ns |
+| **P50 (Median)** | 100,526 ns |
+| **P90** | 291,017 ns |
+| **P99** | 348,274 ns |
+| **P99.9** | 349,599 ns |
+
+---
+
+### ITCH 5.0 Parser
+
+| Benchmark | Messages | Throughput | Bandwidth | Latency |
+|-----------|----------|------------|-----------|---------|
+| **AddOrder Parsing** | 10,000,000 | **98.87 million msgs/sec** | 3.56 GB/sec | 10.1 ns/msg |
+| **Mixed Messages** | 31,936 | 57.73 million msgs/sec | 1.90 GB/sec | 17.3 ns/msg |
+| **Zero-Copy Casting** | 10,000,000 | 123.74 million msgs/sec | — | 8.08 ns/msg |
+| **Endian Conversion** | 100,000,000 | **2.92 billion swaps/sec** | — | 0.34 ns/swap |
+
+#### Mixed Message Distribution
+
+| Message Type | Count | Percentage |
+|--------------|-------|------------|
+| AddOrder | 19,232 | 60.2% |
+| OrderExecuted | 9,570 | 30.0% |
+| OrderDelete | 3,134 | 9.8% |
+
+---
+
+### Test Results
+
+```
+=== Ring Buffer Tests ===
+PASS: test_basic_operations
+PASS: test_full_buffer
+PASS: test_empty_buffer
+PASS: test_power_of_two_size
+PASS: test_size_tracking
+PASS: test_reset
+PASS: test_normalized_message
+
+=== ITCH Parser Tests ===
+PASS: test_add_order_parsing
+PASS: test_order_executed_parsing
+PASS: test_order_delete_parsing
+PASS: test_trade_parsing
+PASS: test_system_event_parsing
+PASS: test_stock_directory_parsing
+PASS: test_callback_invocation
+PASS: test_buffer_parsing
+PASS: test_parse_stats
+PASS: test_unknown_message_type
+
+=== MoldUDP64 Session Layer Tests ===
+PASS: test_header_size
+PASS: test_header_parsing
+PASS: test_heartbeat_detection
+PASS: test_end_of_session
+PASS: test_session_initial_state
+PASS: test_session_normal_operation
+PASS: test_session_gap_detection
+PASS: test_session_heartbeat_handling
+PASS: test_session_multiple_gaps
+PASS: test_session_reset
+PASS: test_session_is_healthy
+PASS: test_truncated_packet
+
+=== Results ===
+Passed: 29
+Failed: 0
+```
 
 ## Key Design Decisions
 

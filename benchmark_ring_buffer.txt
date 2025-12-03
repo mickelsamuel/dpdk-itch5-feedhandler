@@ -1,0 +1,41 @@
+==================================================
+  Lock-Free SPSC Ring Buffer Benchmark
+==================================================
+
+Configuration:
+  Buffer size:     65536 entries
+  Operations:      10000000
+  Latency samples: 100000
+  Cache line size: 64 bytes
+
+=== Single-Threaded Benchmark ===
+Operations:     10000000
+Total time:     22.4241 ms
+Throughput:     445.95 million ops/sec
+Latency:        2.2 ns/op
+
+=== Concurrent Producer/Consumer Benchmark ===
+Operations:     10000000
+Total time:     1472.9 ms
+Throughput:     6.79 million ops/sec
+Produced:       10000000
+Consumed:       10000000
+
+=== Latency Distribution Benchmark ===
+Samples:        100000
+Min:            132 ns
+Max:            350277 ns
+Mean:           137409.0 ns
+P50:            100526 ns
+P90:            291017 ns
+P99:            348274 ns
+P99.9:          349599 ns
+
+=== NormalizedMessage Throughput Benchmark ===
+Message size:   64 bytes
+Operations:     10000000
+Total time:     658.2 ms
+Throughput:     15.19 million msgs/sec
+Consumed:       10000000
+
+==================================================

@@ -1,0 +1,46 @@
+==================================================
+  ITCH 5.0 Parser Benchmark
+==================================================
+
+Message sizes:
+  AddOrder:       36 bytes
+  OrderExecuted:  31 bytes
+  OrderDelete:    19 bytes
+  Trade:          44 bytes
+
+=== Endianness Conversion Benchmark ===
+Operations:     100000000
+Total time:     34.2956 ms
+Throughput:     2.92 billion swaps/sec
+Latency:        0.34 ns/swap
+Checksum:       214737612630769412 (for optimization prevention)
+
+=== Zero-Copy Pointer Casting Benchmark ===
+Messages:       10000000
+Total time:     80.81 ms
+Throughput:     123.74 million msgs/sec
+Latency:        8.08 ns/msg
+Sum:            65505484960000 (for optimization prevention)
+
+=== AddOrder Parsing Benchmark ===
+Messages:       10000000
+Message size:   36 bytes
+Total time:     101.14 ms
+Throughput:     98.87 million msgs/sec
+Bandwidth:      3.56 GB/sec
+Latency:        10.1 ns/msg
+Callback count: 10000000
+
+=== Mixed Message Parsing Benchmark ===
+Messages:       31936
+Buffer size:    1023 KB
+Total time:     0.6 ms
+Throughput:     57.73 million msgs/sec
+Bandwidth:      1.90 GB/sec
+
+Message distribution:
+  AddOrder:      19232 (60.2%)
+  OrderExecuted: 9570 (30.0%)
+  OrderDelete:   3134 (9.8%)
+
+==================================================

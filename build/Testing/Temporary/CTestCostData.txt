@@ -1,4 +1,7 @@
-RingBufferTest 3 0.0966973
-ParserTest 3 0.10039
-MoldUDP64Test 2 0.141861
+RingBufferTest 3 0
+ParserTest 3 0
+MoldUDP64Test 2 0
 ---
+RingBufferTest
+ParserTest
+MoldUDP64Test
