@@ -13,17 +13,7 @@ A high-performance, kernel-bypass market data feed handler for NASDAQ TotalView-
 
 ## Architecture
 
-```
-┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
-│   NIC (DPDK)    │────▶│  Ring Buffer     │────▶│   Consumer      │
-│   Poll Mode     │     │  (Lock-Free)     │     │   (Strategy)    │
-│   Producer Core │     │  SPSC Queue      │     │   Consumer Core │
-└─────────────────┘     └──────────────────┘     └─────────────────┘
-        │                        │
-        │                        │
-   Zero-Copy              Cache-Line
-   Parsing                Aligned
-```
+![Feed Handler Architecture](docs/architecture_diagram.png)
 
 ## Project Structure
 
@@ -210,6 +200,8 @@ python3 scripts/itch_to_pcap.py input.itch output.pcap
 | OrderExecuted | 9,570 | 30.0% |
 | OrderDelete | 3,134 | 9.8% |
 
+![Benchmark Results](docs/benchmark_chart.png)
+
 ---
 
 ### Test Results
@@ -256,6 +248,10 @@ Failed: 0
 ```
 
 ## Key Design Decisions
+
+### Lock-Free Ring Buffer Design
+
+![Ring Buffer Design](docs/ring_buffer_diagram.png)
 
 ### False Sharing Prevention
 
@@ -321,22 +317,7 @@ sudo ./scripts/setup_dpdk_env.sh bind eth1
 
 ## UDP/MoldUDP64 Protocol Stack
 
-```
-┌────────────────────────────────────────────┐
-│              ITCH 5.0 Messages             │
-├────────────────────────────────────────────┤
-│  MoldUDP64 Header (20 bytes)               │
-│  - Session ID (10 bytes)                   │
-│  - Sequence Number (8 bytes)               │
-│  - Message Count (2 bytes)                 │
-├────────────────────────────────────────────┤
-│              UDP Header (8 bytes)          │
-├────────────────────────────────────────────┤
-│              IPv4 Header (20 bytes)        │
-├────────────────────────────────────────────┤
-│            Ethernet Header (14 bytes)      │
-└────────────────────────────────────────────┘
-```
+![Protocol Stack](docs/protocol_stack.png)
 
 ## Gap Detection
 
