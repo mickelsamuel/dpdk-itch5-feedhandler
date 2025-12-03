@@ -1,6 +1,8 @@
 # DPDK ITCH 5.0 Feed Handler
 
-A high-performance, kernel-bypass market data feed handler for NASDAQ TotalView-ITCH 5.0 protocol using DPDK (Data Plane Development Kit).
+> **Kernel-bypass market data** feed handler implementing **NASDAQ TotalView-ITCH 5.0** protocol with **DPDK** (Data Plane Development Kit), **lock-free SPSC ring buffers**, and **zero-copy parsing** for **ultra-low-latency** financial applications.
+
+A high-performance feed handler demonstrating **kernel bypass networking**, **cache-line aligned** data structures, and **real-time market data** processing techniques used in **high-frequency trading (HFT)** systems.
 
 ## Features
 
@@ -181,6 +183,8 @@ python3 scripts/itch_to_pcap.py input.itch output.pcap
 | **P99** | 348,274 ns |
 | **P99.9** | 349,599 ns |
 
+> **Coordinated Omission Awareness:** Concurrent latency measurements use continuous producer/consumer timing without back-off, ensuring tail latencies accurately reflect contention under sustained load.
+
 ---
 
 ### ITCH 5.0 Parser
@@ -246,6 +250,21 @@ PASS: test_truncated_packet
 Passed: 29
 Failed: 0
 ```
+
+## Key Optimizations
+
+| Optimization | Implementation | Why It Matters |
+|--------------|----------------|----------------|
+| **Kernel Bypass** | DPDK poll-mode drivers | Eliminates syscall overhead (~1μs per packet); direct NIC-to-userspace DMA |
+| **Zero-Copy Parsing** | `reinterpret_cast` from mbuf pointers | No `memcpy()`; single pointer dereference vs. buffer copy overhead |
+| **Lock-Free SPSC** | Atomic head/tail with relaxed ordering | 2.2 ns single-threaded ops; no mutex acquisition (~25ns typically) |
+| **False Sharing Prevention** | `alignas(64)` + padding between atomics | Prevents cache line ping-pong between producer/consumer cores |
+| **CPU Pinning** | Dedicated cores for RX and processing | Eliminates context switch overhead (~1-10μs); warm cache guarantee |
+| **Hugepages** | 2MB/1GB page allocation | Reduces TLB misses; contiguous physical memory for DMA |
+| **Compiler Intrinsics** | `__builtin_bswap64` for endian conversion | Single `BSWAP` instruction vs. manual byte manipulation |
+| **Fixed-Point Prices** | `int64_t` with 6 decimal places | Eliminates FPU pipeline; exact arithmetic for financial calculations |
+
+---
 
 ## Key Design Decisions
 
@@ -331,6 +350,23 @@ if (header.sequence_number > expected_sequence_) {
     state_ = SessionState::Stale;
 }
 ```
+
+---
+
+## Technical Skills Demonstrated
+
+| Category | Skills |
+|----------|--------|
+| **Languages** | C++17, Modern C++ (RAII, move semantics, templates, constexpr) |
+| **Networking** | DPDK kernel bypass, poll-mode drivers, hugepage memory, CPU affinity |
+| **Low-Latency Techniques** | Zero-copy parsing, lock-free data structures, cache-line alignment, false sharing prevention |
+| **Protocols** | NASDAQ ITCH 5.0, MoldUDP64 session layer, UDP multicast |
+| **Performance Engineering** | Throughput/latency benchmarking, P50/P99/P99.9 analysis, Coordinated Omission awareness |
+| **Systems Programming** | Endianness handling, memory-mapped I/O, core pinning, interrupt coalescing |
+| **Trading Domain** | Market data feeds, order book updates, trade execution messages, gap detection/recovery |
+| **Build Systems** | CMake, conditional compilation, cross-platform support |
+
+---
 
 ## License
 
