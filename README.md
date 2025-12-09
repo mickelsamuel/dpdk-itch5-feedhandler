@@ -1,5 +1,11 @@
 # DPDK ITCH 5.0 Feed Handler
 
+[![Build](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/mickelsamuel/dpdk-itch5-feedhandler)
+[![C++17](https://img.shields.io/badge/C%2B%2B-17-blue.svg)](https://en.cppreference.com/w/cpp/17)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Parser](https://img.shields.io/badge/parser-98.9M%20msgs%2Fsec-orange)](docs/benchmark_chart.png)
+[![Ring Buffer](https://img.shields.io/badge/ring%20buffer-446M%20ops%2Fsec-red)](docs/benchmark_chart.png)
+
 > **Kernel-bypass market data** feed handler implementing **NASDAQ TotalView-ITCH 5.0** protocol with **DPDK** (Data Plane Development Kit), **lock-free SPSC ring buffers**, and **zero-copy parsing** for **ultra-low-latency** financial applications.
 
 A high-performance feed handler demonstrating **kernel bypass networking**, **cache-line aligned** data structures, and **real-time market data** processing techniques used in **high-frequency trading (HFT)** systems.
